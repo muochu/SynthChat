@@ -22,7 +22,5 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - `npm run lint` - Run ESLint
 - `npm run format` - Format code with Prettier
 
-## Environment Variables
 
-Copy `.env.example` to `.env` and add your API keys (Phase 6).
 

@@ -1,8 +1,11 @@
 export default function Home() {
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-4xl font-bold">SynthChat</h1>
-    </main>
+    <div className="py-12">
+      <h1>SynthChat</h1>
+      <p className="mt-4 text-gray-600">
+        Engineering stories and case studies
+      </p>
+    </div>
   )
 }
 
