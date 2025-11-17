@@ -4,7 +4,7 @@ import Layout from '@/components/layout'
 
 export const metadata: Metadata = {
   title: 'SynthChat',
-  description: 'Engineering stories and case studies',
+  description: 'Synthetic chat generation and analysis for in-house legal teams',
 }
 
 export default function RootLayout({

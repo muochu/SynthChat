@@ -13,9 +13,6 @@ export default function Nav() {
             <Link href="/" className="text-gray-600 hover:text-black transition-colors">
               Home
             </Link>
-            <Link href="/stories" className="text-gray-600 hover:text-black transition-colors">
-              Stories
-            </Link>
           </div>
         </div>
       </Container>
