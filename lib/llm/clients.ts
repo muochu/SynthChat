@@ -21,19 +21,26 @@ export async function generateWithAnthropic(
   prompt: string,
   systemPrompt?: string
 ): Promise<string> {
-  const client = getAnthropicClient()
-  const response = await client.messages.create({
-    model: 'claude-3-5-sonnet-20241022',
-    max_tokens: 4096,
-    system: systemPrompt,
-    messages: [{ role: 'user', content: prompt }],
-  })
+  try {
+    const client = getAnthropicClient()
+    const response = await client.messages.create({
+      model: 'claude-3-opus-20240229',
+      max_tokens: 4096,
+      system: systemPrompt || undefined,
+      messages: [{ role: 'user', content: prompt }],
+    })
 
-  const content = response.content[0]
-  if (content.type === 'text') {
-    return content.text
+    const content = response.content[0]
+    if (content && content.type === 'text') {
+      return content.text
+    }
+    throw new Error('Unexpected response type from Anthropic')
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`Anthropic API error: ${error.message}`)
+    }
+    throw error
   }
-  throw new Error('Unexpected response type from Anthropic')
 }
 
 export async function generateWithOpenAI(

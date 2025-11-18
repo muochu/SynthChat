@@ -14,15 +14,30 @@ Generate conversations that reflect real-world scenarios an in-house commercial 
 
 Make the conversations realistic, practical, and focused on actionable legal advice. The lawyer should ask specific questions and receive detailed, helpful responses.`
 
-export const COMMERCIAL_LAWYER_CHAT_PROMPT = `Generate a realistic chat conversation between an in-house commercial contracts lawyer and GC AI. The conversation should:
+export const COMMERCIAL_LAWYER_CHAT_PROMPT = `Generate a realistic chat conversation between an in-house commercial contracts lawyer and GC AI.
 
+IMPORTANT: Choose a DIFFERENT topic for each conversation. Vary between:
+- MSA development and templates (SaaS, professional services, vendor agreements)
+- Vendor agreement negotiations (terms, pricing, SLAs, termination)
+- Terms and conditions updates (website, mobile app, SaaS platform)
+- Non-compete clause analysis (enforceability, FTC rules, state variations)
+- Indemnification and liability provisions (scope, caps, exclusions)
+- License agreements (software, IP, content licensing)
+- Employment contract terms (NDAs, IP assignment, non-solicitation)
+- Customer agreements and SOWs (scope, deliverables, change orders)
+- Contract dispute resolution (arbitration, mediation, choice of law)
+- Data processing agreements and security requirements
+- Service level agreements (uptime, penalties, remedies)
+- Intellectual property ownership and rights
+
+The conversation should:
 1. Start with a specific contract or commercial law question or scenario
 2. Include 3-5 message exchanges (alternating between lawyer questions and GC AI responses)
-3. Cover a real-world commercial contracts topic
+3. Cover a DIFFERENT real-world commercial contracts topic than previous conversations
 4. Show the lawyer receiving actionable, practical advice
 5. Be realistic and reflect actual concerns an in-house commercial contracts lawyer would have
 
-Return the conversation as JSON in this exact format:
+Return ONLY valid JSON in this exact format (no markdown, no explanation, no code blocks):
 {
   "messages": [
     {"role": "user", "content": "lawyer question here"},
@@ -30,8 +45,8 @@ Return the conversation as JSON in this exact format:
     {"role": "user", "content": "follow-up question"},
     {"role": "assistant", "content": "GC AI follow-up response"}
   ],
-  "topic": "brief topic description (e.g., 'MSA Development Checklist')"
+  "topic": "brief unique topic description"
 }
 
-Only return valid JSON, no other text.`
+CRITICAL: Return ONLY the JSON object, nothing else. Ensure all strings are properly escaped and closed. No trailing commas.`
 

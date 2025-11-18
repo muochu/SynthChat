@@ -6,8 +6,10 @@ import {
   TimeSavings,
 } from '@/types/insights'
 
+// Time saved per chat estimate - traditional research takes 30-60 min
 const ESTIMATED_MINUTES_PER_CHAT = 35
 
+// Counts how often each topic appears and calculates percentages
 function extractTopics(chats: Chat[]): TopicFrequency[] {
   const topicMap = new Map<string, number>()
 
@@ -30,6 +32,7 @@ function extractTopics(chats: Chat[]): TopicFrequency[] {
   return topics.sort((a, b) => b.count - a.count)
 }
 
+// Pulls out the first question from each chat and finds the most common ones
 function extractFAQs(chats: Chat[]): FAQ[] {
   const faqMap = new Map<string, { question: string; category: string }>()
 
@@ -68,6 +71,7 @@ function extractFAQs(chats: Chat[]): FAQ[] {
   return faqs
 }
 
+// Calculates total time saved, broken down by lawyer type
 function calculateTimeSavings(chats: Chat[]): TimeSavings {
   const privacyChats = chats.filter(c => c.lawyerType === 'privacy')
   const commercialChats = chats.filter(c => c.lawyerType === 'commercial')
@@ -146,6 +150,7 @@ function generateKeyInsights(
   return insights
 }
 
+// Main function that analyzes all chats and returns insights for the email
 export function analyzeChats(chats: Chat[]): ChatInsights {
   const topics = extractTopics(chats)
   const topFAQs = extractFAQs(chats)
