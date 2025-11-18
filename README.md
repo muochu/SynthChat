@@ -33,3 +33,12 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - `npm run start` - Start production server
 - `npm run lint` - Run ESLint
 - `npm run format` - Format code with Prettier
+
+## Architecture
+
+- **API Routes**: `/api/generate-and-analyze` - Generates chats and analyzes insights
+- **LLM Integration**: Uses Anthropic Claude for chat generation
+- **Analysis**: Extracts topics, FAQs, and calculates time savings
+- **Email**: React-Email templates for formatted reports
+- **UI**: Next.js App Router with TypeScript and Tailwind CSS
+

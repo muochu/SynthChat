@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk'
 import OpenAI from 'openai'
+import { ANTHROPIC_MODEL, OPENAI_MODEL, MAX_TOKENS } from '@/lib/constants'
 
 export function getAnthropicClient(): Anthropic {
   const apiKey = process.env.ANTHROPIC_API_KEY
@@ -24,8 +25,8 @@ export async function generateWithAnthropic(
   try {
     const client = getAnthropicClient()
     const response = await client.messages.create({
-      model: 'claude-3-opus-20240229',
-      max_tokens: 4096,
+      model: ANTHROPIC_MODEL,
+      max_tokens: MAX_TOKENS,
       system: systemPrompt || undefined,
       messages: [{ role: 'user', content: prompt }],
     })
@@ -47,19 +48,26 @@ export async function generateWithOpenAI(
   prompt: string,
   systemPrompt?: string
 ): Promise<string> {
-  const client = getOpenAIClient()
-  const response = await client.chat.completions.create({
-    model: 'gpt-4-turbo-preview',
-    messages: [
-      ...(systemPrompt ? [{ role: 'system', content: systemPrompt }] : []),
-      { role: 'user', content: prompt },
-    ],
-  })
+  try {
+    const client = getOpenAIClient()
+    const response = await client.chat.completions.create({
+      model: OPENAI_MODEL,
+      messages: [
+        ...(systemPrompt ? [{ role: 'system', content: systemPrompt }] : []),
+        { role: 'user', content: prompt },
+      ],
+    })
 
-  const content = response.choices[0]?.message?.content
-  if (!content) {
-    throw new Error('No content in OpenAI response')
+    const content = response.choices[0]?.message?.content
+    if (!content) {
+      throw new Error('No content in OpenAI response')
+    }
+    return content
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(`OpenAI API error: ${error.message}`)
+    }
+    throw error
   }
-  return content
 }
 

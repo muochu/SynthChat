@@ -5,9 +5,7 @@ import {
   FAQ,
   TimeSavings,
 } from '@/types/insights'
-
-// Time saved per chat estimate - traditional research takes 30-60 min
-const ESTIMATED_MINUTES_PER_CHAT = 35
+import { ESTIMATED_MINUTES_PER_CHAT } from '@/lib/constants'
 
 // Counts how often each topic appears and calculates percentages
 function extractTopics(chats: Chat[]): TopicFrequency[] {

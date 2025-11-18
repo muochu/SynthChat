@@ -8,6 +8,13 @@ import {
   COMMERCIAL_LAWYER_SYSTEM_PROMPT,
   COMMERCIAL_LAWYER_CHAT_PROMPT,
 } from '@/lib/prompts/commercial'
+import {
+  DEFAULT_CHAT_COUNT,
+  BATCH_SIZE,
+  BATCH_DELAY_MS,
+  RETRY_DELAY_MS,
+  MAX_RETRIES,
+} from '@/lib/constants'
 
 interface LLMChatResponse {
   messages: ChatMessage[]
@@ -65,8 +72,10 @@ function parseLLMResponse(response: string): LLMChatResponse {
   }
 }
 
-// Generates one privacy lawyer chat, retries once on failure
-export async function generatePrivacyChat(retries = 1): Promise<Chat> {
+// Generates one privacy lawyer chat, retries on failure
+export async function generatePrivacyChat(
+  retries = MAX_RETRIES
+): Promise<Chat> {
   const systemPrompt = PRIVACY_LAWYER_SYSTEM_PROMPT
   const userPrompt = PRIVACY_LAWYER_CHAT_PROMPT
 
@@ -85,15 +94,17 @@ export async function generatePrivacyChat(retries = 1): Promise<Chat> {
       console.log(
         `Retrying privacy chat generation (${retries} retries left)...`
       )
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS))
       return generatePrivacyChat(retries - 1)
     }
     throw error
   }
 }
 
-// Generates one commercial lawyer chat, retries once on failure
-export async function generateCommercialChat(retries = 1): Promise<Chat> {
+// Generates one commercial lawyer chat, retries on failure
+export async function generateCommercialChat(
+  retries = MAX_RETRIES
+): Promise<Chat> {
   const systemPrompt = COMMERCIAL_LAWYER_SYSTEM_PROMPT
   const userPrompt = COMMERCIAL_LAWYER_CHAT_PROMPT
 
@@ -112,53 +123,45 @@ export async function generateCommercialChat(retries = 1): Promise<Chat> {
       console.log(
         `Retrying commercial chat generation (${retries} retries left)...`
       )
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS))
       return generateCommercialChat(retries - 1)
     }
     throw error
   }
 }
 
-// Generates multiple privacy chats in parallel batches
-export async function generatePrivacyChats(
-  count: number = 10
+// Helper to generate chats in batches
+async function generateChatsInBatches(
+  generateFn: () => Promise<Chat>,
+  count: number
 ): Promise<Chat[]> {
-  const batchSize = 5
   const chats: Chat[] = []
 
-  for (let i = 0; i < count; i += batchSize) {
-    const batch = Array.from({ length: Math.min(batchSize, count - i) }, () =>
-      generatePrivacyChat()
+  for (let i = 0; i < count; i += BATCH_SIZE) {
+    const batch = Array.from({ length: Math.min(BATCH_SIZE, count - i) }, () =>
+      generateFn()
     )
     const batchResults = await Promise.all(batch)
     chats.push(...batchResults)
 
-    if (i + batchSize < count) {
-      await new Promise(resolve => setTimeout(resolve, 500))
+    if (i + BATCH_SIZE < count) {
+      await new Promise(resolve => setTimeout(resolve, BATCH_DELAY_MS))
     }
   }
 
   return chats
 }
 
+// Generates multiple privacy chats in parallel batches
+export async function generatePrivacyChats(
+  count: number = DEFAULT_CHAT_COUNT
+): Promise<Chat[]> {
+  return generateChatsInBatches(generatePrivacyChat, count)
+}
+
 // Generates multiple commercial chats in parallel batches
 export async function generateCommercialChats(
-  count: number = 10
+  count: number = DEFAULT_CHAT_COUNT
 ): Promise<Chat[]> {
-  const batchSize = 5
-  const chats: Chat[] = []
-
-  for (let i = 0; i < count; i += batchSize) {
-    const batch = Array.from({ length: Math.min(batchSize, count - i) }, () =>
-      generateCommercialChat()
-    )
-    const batchResults = await Promise.all(batch)
-    chats.push(...batchResults)
-
-    if (i + batchSize < count) {
-      await new Promise(resolve => setTimeout(resolve, 500))
-    }
-  }
-
-  return chats
+  return generateChatsInBatches(generateCommercialChat, count)
 }

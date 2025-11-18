@@ -4,13 +4,14 @@ import {
   generateCommercialChats,
 } from '@/lib/generators/chatGenerator'
 import { analyzeChats } from '@/lib/analysis/chatAnalyzer'
+import { DEFAULT_CHAT_COUNT } from '@/lib/constants'
 
 export async function POST() {
   try {
     console.log('Starting chat generation...')
     const [privacyChats, commercialChats] = await Promise.all([
-      generatePrivacyChats(10),
-      generateCommercialChats(10),
+      generatePrivacyChats(DEFAULT_CHAT_COUNT),
+      generateCommercialChats(DEFAULT_CHAT_COUNT),
     ])
 
     console.log(`Generated ${privacyChats.length} privacy chats and ${commercialChats.length} commercial chats`)
