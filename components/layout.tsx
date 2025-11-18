@@ -18,7 +18,7 @@ export default function Layout({ children }: LayoutProps) {
       <footer className="border-t border-gray-200 py-8">
         <Container>
           <p className="text-sm text-gray-500 text-center">
-            SynthChat - Engineering Stories
+            SynthChat - AI-driven synthetic chat analysis
           </p>
         </Container>
       </footer>

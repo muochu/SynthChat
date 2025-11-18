@@ -77,12 +77,10 @@ function calculateTimeSavings(chats: Chat[]): TimeSavings {
   const commercialChats = chats.filter(c => c.lawyerType === 'commercial')
 
   const privacyMinutes = privacyChats.length * ESTIMATED_MINUTES_PER_CHAT
-  const commercialMinutes =
-    commercialChats.length * ESTIMATED_MINUTES_PER_CHAT
+  const commercialMinutes = commercialChats.length * ESTIMATED_MINUTES_PER_CHAT
 
   const totalMinutes = privacyMinutes + commercialMinutes
-  const averagePerChat =
-    chats.length > 0 ? totalMinutes / chats.length : 0
+  const averagePerChat = chats.length > 0 ? totalMinutes / chats.length : 0
 
   return {
     totalMinutes,
@@ -108,10 +106,14 @@ function generateKeyInsights(
 ): string[] {
   const insights: string[] = []
 
-  if (topics.length > 0) {
+  // Only show most common topic if it appears multiple times
+  if (topics.length > 0 && topics[0].count > 1) {
+    const chatWord = topics[0].count === 1 ? 'chat' : 'chats'
     insights.push(
-      `Most common topic: ${topics[0].topic} (appeared in ${topics[0].count} chats)`
+      `Most common topic: ${topics[0].topic} (appeared in ${topics[0].count} ${chatWord})`
     )
+  } else if (topics.length > 0) {
+    insights.push(`Generated ${topics.length} unique legal topics`)
   }
 
   insights.push(
@@ -171,4 +173,3 @@ export function analyzeChats(chats: Chat[]): ChatInsights {
     keyInsights,
   }
 }
-
