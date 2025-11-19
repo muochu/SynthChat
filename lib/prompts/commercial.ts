@@ -23,6 +23,9 @@ Most common topics that appear frequently:
 - MSA development and templates (SaaS, professional services, vendor agreements)
 - Vendor agreement negotiations (terms, pricing, SLAs, termination, liability)
 - SaaS MSA terms (liability caps, indemnification, IP ownership)
+- Employee handbook updates and compliance reviews
+- Purchase order terms and conditions review
+- Contract template creation and comparison
 
 These are routine contract types that a commercial lawyer handles regularly, so they naturally recur.
 
@@ -38,21 +41,43 @@ Other topics that may come up occasionally:
 - Intellectual property ownership and rights
 
 The conversation should:
-1. Start with a specific contract or commercial law question or scenario
+1. Start with one of these realistic task types:
+   - Document review: "Please review these attached [documents/templates/purchase order terms] and [create a checklist/compare sections/identify gaps/explain why we can't accept]"
+   - Work product request: "I need to [create an MSA/update employee handbook/review vendor agreement]. Can you help me [create a checklist/analyze provisions/compare terms/draft a response]?"
+   - Multi-step task: Start with document review, then ask for format changes or additional details
+
 2. Include 8-14 messages total (alternating between lawyer questions and GC AI responses) - this is a substantive, realistic conversation
-3. Show natural conversation flow:
-   - Initial question with context about the contract/scenario
-   - GC AI provides comprehensive answer
-   - Lawyer asks follow-up for clarification on specific terms
-   - Lawyer dives deeper into negotiation considerations
-   - Discussion of risk mitigation or alternatives
-   - Lawyer asks about market standards or best practices
-   - Additional clarifications as needed
-4. Make it feel like a real working session where the lawyer is exploring a topic thoroughly
-5. Use common topics frequently (MSAs, vendor agreements, software licenses appear often in real practice)
-6. Show the lawyer receiving actionable, practical advice with real-world applicability
-7. Be realistic and reflect actual concerns an in-house commercial contracts lawyer would have
-8. Include substantive responses from GC AI (3-5 sentences minimum per response) that provide real value
+
+3. Show natural conversation flow with task-oriented patterns:
+   - Initial task request with context (reference attachments: "I've attached...", "Please review these documents...")
+   - GC AI provides comprehensive analysis or creates requested work product (checklist, comparison, explanation)
+   - Lawyer asks for iterative refinement: format changes ("Can you put this in a chart for Excel?", "Instead of a list, can you make a table?"), additions ("Can you add more detail on...", "What else should I consider?"), or clarification
+   - GC AI provides updated work product
+   - Additional refinements or follow-up questions as needed
+   - Discussion of implementation or next steps
+
+4. Include references to documents and attachments naturally:
+   - "I've attached [document names]"
+   - "Please review these templates"
+   - "See the attached purchase order terms"
+   - Lawyer should reference document names and specific sections
+
+5. Show iterative refinement patterns:
+   - After initial output, lawyer requests format changes ("Can you put this in an Excel chart format?", "Create a table with columns: X, Y, Z")
+   - Lawyer asks for additions ("Can you add state-specific requirements?", "Include a column for why we want this edit")
+   - Lawyer requests more detail ("Can you expand on the indemnification section?", "Add more explanation of how to broaden this provision")
+
+6. Request specific output formats when appropriate:
+   - Excel charts/tables ("Put this in a chart I can paste into Excel")
+   - Structured lists with columns ("Include section, description, benefit, and adjustments")
+   - Checklists with bullet points
+   - Comparison tables
+
+7. Make it feel like a real working session where the lawyer is creating actual work product
+8. Use common topics frequently (MSAs, vendor agreements, employee handbooks appear often in real practice)
+9. Show the lawyer receiving actionable, practical advice with real-world applicability
+10. Include substantive responses from GC AI (3-5 sentences minimum per response) that provide real value
+11. Show company-specific context when relevant (company name, industry, employee count, locations)
 
 Return ONLY valid JSON in this exact format (no markdown, no explanation, no code blocks):
 {

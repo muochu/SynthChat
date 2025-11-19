@@ -22,6 +22,9 @@ Most common topics that appear frequently:
 - GDPR compliance (data processing, consent, rights, breach notification)
 - Privacy policy updates (GDPR, CCPA, international requirements)
 - Data breach notification requirements (GDPR, CCPA, state laws)
+- Privacy policy reviews and updates
+- DPA (Data Processing Agreement) creation and review
+- Compliance checklist creation
 
 These topics often appear multiple times because they're foundational and lawyers need guidance on different aspects or scenarios.
 
@@ -36,21 +39,45 @@ Other topics that may come up occasionally:
 - Data subject rights requests (access, deletion, portability)
 
 The conversation should:
-1. Start with a specific privacy/compliance question or scenario
+1. Start with one of these realistic task types:
+   - Document review: "Please review these [privacy policies/DPAs/compliance documents] and [create a checklist/identify gaps/compare against requirements]"
+   - Work product request: "I need to [update our privacy policy/review vendor DPAs/create a compliance checklist]. Can you help me [create a checklist/analyze requirements/draft sections]?"
+   - Compliance analysis: "We're expanding to [region]. What do I need to update in our privacy policy? Can you create a checklist?"
+   - Multi-step task: Start with analysis, then ask for format changes or additional details
+
 2. Include 8-14 messages total (alternating between lawyer questions and GC AI responses) - this is a substantive, realistic conversation
-3. Show natural conversation flow:
-   - Initial question with context
-   - GC AI provides comprehensive answer
-   - Lawyer asks follow-up for clarification
-   - Lawyer dives deeper into specific points
-   - Discussion of edge cases or exceptions
-   - Lawyer asks about implementation or next steps
-   - Additional clarifications as needed
-4. Make it feel like a real working session where the lawyer is exploring a topic thoroughly
-5. Use common topics frequently (GDPR, CCPA, privacy policies appear often in real practice)
-6. Show the lawyer receiving actionable, practical advice with real-world applicability
-7. Be realistic and reflect actual concerns an in-house privacy lawyer would have
-8. Include substantive responses from GC AI (3-5 sentences minimum per response) that provide real value
+
+3. Show natural conversation flow with task-oriented patterns:
+   - Initial task request with context (reference attachments: "I've attached our current privacy policy...", "Please review these DPA templates...")
+   - GC AI provides comprehensive analysis or creates requested work product (checklist, comparison, recommendations)
+   - Lawyer asks for iterative refinement: format changes ("Can you put this in a table format?", "Create an Excel chart with these items"), additions ("What about state-specific requirements?", "Can you add more detail on GDPR obligations?"), or clarification
+   - GC AI provides updated work product
+   - Additional refinements or follow-up questions as needed
+   - Discussion of implementation or next steps
+
+4. Include references to documents and attachments naturally:
+   - "I've attached our [current privacy policy/DPA template/compliance checklist]"
+   - "Please review these vendor DPAs"
+   - "See the attached privacy policy from [vendor/partner]"
+   - Lawyer should reference document names and specific sections
+
+5. Show iterative refinement patterns:
+   - After initial output, lawyer requests format changes ("Can you put this in an Excel table?", "Create a checklist format I can share with the team")
+   - Lawyer asks for additions ("What else should I consider for CCPA?", "Add state-specific requirements for Texas, New York, Florida")
+   - Lawyer requests more detail ("Can you expand on data breach notification timelines?", "Add more explanation of GDPR data subject rights")
+
+6. Request specific output formats when appropriate:
+   - Excel charts/tables ("Put this in a chart I can paste into Excel")
+   - Structured checklists with categories
+   - Comparison tables (current vs required)
+   - Action item lists
+
+7. Make it feel like a real working session where the lawyer is creating actual work product
+8. Use common topics frequently (GDPR, CCPA, privacy policies appear often in real practice)
+9. Show the lawyer receiving actionable, practical advice with real-world applicability
+10. Be realistic and reflect actual concerns an in-house privacy lawyer would have
+11. Include substantive responses from GC AI (3-5 sentences minimum per response) that provide real value
+12. Show company-specific context when relevant (company name, industry, data types handled, geographic locations)
 
 Return ONLY valid JSON in this exact format (no markdown, no explanation, no code blocks):
 {
