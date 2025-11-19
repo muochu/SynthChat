@@ -25,13 +25,10 @@ export async function POST() {
     })
   } catch (error) {
     console.error('Error in generate-and-analyze route:', error)
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
-    const errorStack = error instanceof Error ? error.stack : undefined
-    console.error('Error details:', errorMessage, errorStack)
     return NextResponse.json(
       {
         error: 'Internal server error',
-        details: errorMessage,
+        details: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     )

@@ -41,4 +41,3 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - **Analysis**: Extracts topics, FAQs, and calculates time savings
 - **Email**: React-Email templates for formatted reports
 - **UI**: Next.js App Router with TypeScript and Tailwind CSS
-

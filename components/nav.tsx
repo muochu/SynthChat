@@ -12,13 +12,24 @@ export default function Nav() {
       const sections = new Set<string>()
       if (document.getElementById('insights')) sections.add('insights')
       if (document.getElementById('chats')) sections.add('chats')
-      if (document.getElementById('email')) sections.add('email')
       setVisibleSections(sections)
     }
 
     checkSections()
-    const interval = setInterval(checkSections, 500)
-    return () => clearInterval(interval)
+    const observer = new IntersectionObserver(
+      () => checkSections(),
+      { rootMargin: '-20% 0px -70% 0px' }
+    )
+
+    const insightsEl = document.getElementById('insights')
+    const chatsEl = document.getElementById('chats')
+    if (insightsEl) observer.observe(insightsEl)
+    if (chatsEl) observer.observe(chatsEl)
+
+    return () => {
+      if (insightsEl) observer.unobserve(insightsEl)
+      if (chatsEl) observer.unobserve(chatsEl)
+    }
   }, [])
 
   const scrollToSection = (id: string) => {
@@ -58,14 +69,6 @@ export default function Nav() {
                   className="text-gray-600 hover:text-black transition-colors"
                 >
                   Chats
-                </button>
-              )}
-              {visibleSections.has('email') && (
-                <button
-                  onClick={() => scrollToSection('email')}
-                  className="text-gray-600 hover:text-black transition-colors"
-                >
-                  Email
                 </button>
               )}
             </div>

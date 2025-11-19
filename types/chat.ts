@@ -8,11 +8,5 @@ export interface Chat {
   lawyerType: 'privacy' | 'commercial'
   messages: ChatMessage[]
   topic?: string
-  estimatedTimeSaved?: number
-}
-
-export interface ChatGenerationRequest {
-  lawyerType: 'privacy' | 'commercial'
-  count?: number
 }
 

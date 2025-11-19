@@ -37,7 +37,3 @@ export interface ChatInsights {
   keyInsights: string[]
 }
 
-export interface AnalysisRequest {
-  chats: Chat[]
-}
-
