@@ -99,26 +99,39 @@ export default function InsightsEmail({ insights }: InsightsEmailProps) {
             <Heading style={h2}>Top Topics Discussed</Heading>
             {insights.topics.slice(0, 5).map((topic, index) => (
               <Section key={index} style={topicBox}>
-                <Row>
-                  <Column style={barColumn}>
-                    <Text style={topicName}>{topic.topic}</Text>
-                    <Text style={topicCount}>
-                      {topic.count} conversation{topic.count !== 1 ? 's' : ''} •{' '}
-                      {topic.percentage}%
-                    </Text>
-                    <Section style={barContainer}>
-                      <Section
-                        style={{
-                          ...barFill,
-                          width: `${topic.percentage}%`,
-                        }}
-                      />
-                    </Section>
-                  </Column>
-                  <Column style={percentageColumn}>
-                    <Text style={percentage}>{topic.percentage}%</Text>
-                  </Column>
-                </Row>
+                <Text style={topicName}>{topic.topic}</Text>
+                <Text style={topicCount}>
+                  {topic.count} conversation{topic.count !== 1 ? 's' : ''} •{' '}
+                  {topic.percentage}%
+                </Text>
+                <table
+                  style={{
+                    width: '100%',
+                    borderCollapse: 'collapse',
+                    margin: '8px 0 0',
+                  }}
+                  cellPadding="0"
+                  cellSpacing="0"
+                >
+                  <tr>
+                    <td
+                      style={{
+                        width: `${topic.percentage}%`,
+                        height: '12px',
+                        backgroundColor: '#2563eb',
+                        borderRadius: '6px 0 0 6px',
+                      }}
+                    />
+                    <td
+                      style={{
+                        width: `${100 - topic.percentage}%`,
+                        height: '12px',
+                        backgroundColor: '#e5e7eb',
+                        borderRadius: '0 6px 6px 0',
+                      }}
+                    />
+                  </tr>
+                </table>
               </Section>
             ))}
           </Section>
@@ -257,38 +270,6 @@ const topicName = {
   fontWeight: '600',
   color: '#1a1a1a',
   margin: '0 0 8px',
-}
-
-const barColumn = {
-  width: '70%',
-  paddingRight: '10px',
-}
-
-const percentageColumn = {
-  width: '30%',
-  textAlign: 'right' as const,
-}
-
-const barContainer = {
-  backgroundColor: '#e5e7eb',
-  borderRadius: '4px',
-  height: '8px',
-  margin: '8px 0 0',
-  overflow: 'hidden',
-  width: '100%',
-}
-
-const barFill = {
-  height: '8px',
-  backgroundColor: '#2563eb',
-  borderRadius: '4px',
-}
-
-const percentage = {
-  fontSize: '14px',
-  fontWeight: '600',
-  color: '#2563eb',
-  margin: '0',
 }
 
 const topicCount = {
